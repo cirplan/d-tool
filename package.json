@@ -1,0 +1,35 @@
+{
+  "name": "de-tool",
+  "version": "0.0.1",
+  "description": "npm test function",
+  "main": "dist/de-tool.cjs.prod.js",
+  "module": "dist/de-tool.esm.prod.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=production rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cirplan/de-tool.git"
+  },
+  "keywords": [
+    "util"
+  ],
+  "author": "dcirplan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cirplan/de-tool/issues"
+  },
+  "homepage": "https://github.com/cirplan/de-tool#readme",
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "rollup": "^1.26.0",
+    "rollup-plugin-terser": "^5.1.2"
+  }
+}
