@@ -1,4 +1,6 @@
 import path from 'path'
+import typescript from 'rollup-plugin-typescript';
+import { eslint } from 'rollup-plugin-eslint';
 
 const name = 'de-tool';
 
@@ -43,10 +45,14 @@ export default packageConfigs
 
 function createConfig(output, plugins = []) {
   return {
-    input: resolve(`lib/index.js`),
+    input: resolve(`lib/index.ts`),
     // Global and Browser ESM builds inlines everything so that they can be
     // used alone.
-    plugins,
+    plugins: [
+      eslint(),
+      typescript(),
+      ...plugins
+    ],
     output,
     onwarn: (msg, warn) => {
       if (!/Circular/.test(msg)) {

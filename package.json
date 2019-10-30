@@ -12,7 +12,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c"
+    "dev": "rollup -cw",
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "lint": "eslint ./lib --ext .ts --fix",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -28,8 +31,26 @@
   },
   "homepage": "https://github.com/cirplan/de-tool#readme",
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/jest": "^24.0.21",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
+    "babel-jest": "^24.9.0",
     "cross-env": "^6.0.3",
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^24.9.0",
     "rollup": "^1.26.0",
-    "rollup-plugin-terser": "^5.1.2"
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript": "^1.0.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.4"
   }
 }
