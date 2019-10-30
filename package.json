@@ -52,5 +52,11 @@
     "rollup-plugin-typescript": "^1.0.1",
     "tslib": "^1.10.0",
     "typescript": "^3.6.4"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "./lib/**/*.{js,ts}"
+    ]
   }
 }
