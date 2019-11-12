@@ -1,4 +1,4 @@
-{
+module.exports = {
   "env": {
     "browser": true,
     "es6": true,
@@ -16,5 +16,10 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "semi": [
+      "error",
+      "always"
+    ]
+  }
 }

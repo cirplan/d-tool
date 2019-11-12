@@ -6,7 +6,7 @@ import { leapMonth } from './month';
  * @param year
  * @param month
  */
-export function getLastDays(year: number, month: number): number {
+export function getLastDays (year: number, month: number): number {
   return new Date(year, month, 0).getDate();
 }
 
@@ -15,18 +15,16 @@ export function getLastDays(year: number, month: number): number {
  * @param year
  * @param month
  */
-export function getDays(year: number, month: number): Array<number> {
+export function getDays (year: number, month: number): Array<number> {
   return new Array(getLastDays(year, month)).fill(0).map((it, i) => i + 1);
 }
-
-
 
 /**
  * 根据年，月获取该月农历天数列表
  * @param year
  * @param month
  */
-export function getLunarDays(year: number, month: number): Array<string> {
+export function getLunarDays (year: number, month: number): Array<string> {
   const _leapMonth = leapMonth(year);
   let lastDay;
   // 闰月
@@ -44,7 +42,7 @@ export function getLunarDays(year: number, month: number): Array<string> {
 * @param lunar Year
 * @return Number (0、29、30)
 */
-export function leapDays(year: number) {
+export function leapDays (year: number) {
   if (leapMonth(year)) {
     return ((lunarInfo[year - 1900] & 0x10000) ? 30 : 29);
   }
@@ -57,7 +55,7 @@ export function leapDays(year: number) {
   * @return Number (-1、29、30)
   * @eg:var MonthDay = calendar.monthDays(1987,9) ;//MonthDay=29
   */
-export function monthDays(year: number, month: number) {
+export function monthDays (year: number, month: number) {
   return ((lunarInfo[year - 1900] & (0x10000 >> month)) ? 30 : 29);
 }
 
@@ -69,20 +67,35 @@ const lunarDayDef2 = ['日', '一', '二', '三', '四', '五', '六', '七', '�
 * @param lunar day
 * @return Cn string
 */
-export function toChinaDay(day: number) {
+export function toChinaDay (day: number) {
   var s;
   switch (day) {
     case 10:
-      s = '初十'; break;
+      s = '初十';
+      break;
     case 20:
-      s = '廿十'; break;
+      s = '廿十';
       break;
     case 30:
-      s = '卅十'; break;
+      s = '卅十';
       break;
     default:
       s = lunarDayDef[Math.floor(day / 10)];
       s += lunarDayDef2[day % 10];
   }
   return (s);
+}
+
+/**
+* 返回农历y年一整年的总天数
+* @param lunar Year
+* @return Number
+*/
+export function lunarYearDays (year: number) {
+  let i;
+  let sum = 348;
+  for (i = 0x8000; i > 0x8; i >>= 1) {
+    sum += (lunarInfo[year - 1900] & i) ? 1 : 0;
+  }
+  return (sum + leapDays(year));
 }
