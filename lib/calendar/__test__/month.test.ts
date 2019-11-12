@@ -39,7 +39,7 @@ describe('toChinaMonth', () => {
     expect(toChinaMonth(12)).toEqual('腊');
   });
 
-  function toChinaMonth0() {
+  function toChinaMonth0 () {
     toChinaMonth(0);
   }
 

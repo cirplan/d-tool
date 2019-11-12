@@ -69,7 +69,21 @@ export function toGanZhiYear (year: number) {
   return Gan[ganKey - 1] + Zhi[zhiKey - 1];
 }
 
+/**
+ * 获取农历年份列表
+ * @param param0
+ */
 export function getLunarYearByStep ({ end = (new Date()).getFullYear(), step = 5 }: Scope): Array<string> {
   const years = getYearsByStep({ end, step });
   return years.map(year => toGanZhiYear(year));
+}
+
+export const Animals = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
+
+/**
+ * 根据年份大致转换生肖
+ * @param year
+ */
+export function getAnimal (year: number) {
+  return Animals[(year - 4) % 12];
 }

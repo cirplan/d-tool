@@ -27,7 +27,7 @@ export function leapMonth (year: number) {
  * 返回中文月份
  * @param month 1 - 12
  */
-export function toChinaMonth(month: number): string {
+export function toChinaMonth (month: number): string {
   if (month > 12 || month < 1) {
     throw new RangeError(`month cannot to be ${month}`);
   }

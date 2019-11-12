@@ -7,7 +7,7 @@ import { leapMonth } from './month';
  * @param month
  * @param day
  */
-export function solar2lunar(year: number, month: number, day: number) {
+export function solar2lunar (year: number, month: number, day: number) {
   if (year < 1900 || year > 2100) {
     return -1;
   }
@@ -86,13 +86,14 @@ export function solar2lunar(year: number, month: number, day: number) {
  * @param month
  * @param day
  */
-export function lunar2solar(year: number, month: number, day: number) {
-  let _leapMonth = leapMonth(year);
-  let _leapDay = leapDays(year);
-  let isLeapMonth = _leapMonth === month;
+export function lunar2solar (year: number, month: number, day: number) {
+  const _leapMonth = leapMonth(year);
+  const _leapDay = leapDays(year);
+  const isLeapMonth = _leapMonth === month;
   // 超出了最大极限值
-  if (year == 2100 && month == 12 && day > 1 || year == 1900 && month == 1 && day < 31) {
-    return -1;
+  if ((year === 2100 && month === 12 && day > 1) ||
+   (year === 1900 && month === 1 && day < 31)) {
+    throw new RangeError(`${year} ${month} ${day} is outer rang`);
   }
   let _day = monthDays(year, month);
 
@@ -100,7 +101,7 @@ export function lunar2solar(year: number, month: number, day: number) {
     _day = _leapDay;
   }
 
-  //计算农历的时间差
+  // 计算农历的时间差
   let offset = 0;
   for (let i = 1900; i < year; i++) {
     offset += lunarYearDays(i);
@@ -119,26 +120,26 @@ export function lunar2solar(year: number, month: number, day: number) {
     offset += monthDays(year, i);
   }
 
-  //转换闰月农历 需补充该年闰月的前一个月的时差
+  // 转换闰月农历 需补充该年闰月的前一个月的时差
   if (isLeapMonth) {
     offset += _day;
   }
 
-  //1900年农历正月一日的公历时间为1900年1月30日0时0分0秒(该时间也是本农历的最开始起始点)
-  let stmap = Date.UTC(1900, 1, 30, 0, 0, 0);
-  let calObj = new Date((offset + day - 31) * 86400000 + stmap);
-  let cY = calObj.getUTCFullYear();
-  let cM = calObj.getUTCMonth() + 1;
-  let cD = calObj.getUTCDate();
+  // 1900年农历正月一日的公历时间为1900年1月30日0时0分0秒(该时间也是本农历的最开始起始点)
+  const stmap = Date.UTC(1900, 1, 30, 0, 0, 0);
+  const calObj = new Date((offset + day - 31) * 86400000 + stmap);
+  const cY = calObj.getUTCFullYear();
+  const cM = calObj.getUTCMonth() + 1;
+  const cD = calObj.getUTCDate();
 
-  let objDate = new Date(cY, cM - 1, cD);
-  let y = objDate.getFullYear();
-  let m = objDate.getMonth() + 1;
-  let d = objDate.getDate();
+  const objDate = new Date(cY, cM - 1, cD);
+  const y = objDate.getFullYear();
+  const m = objDate.getMonth() + 1;
+  const d = objDate.getDate();
 
   return {
     year: y,
     month: m,
     day: d
-  }
+  };
 }

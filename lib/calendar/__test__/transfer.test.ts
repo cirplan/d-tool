@@ -12,7 +12,7 @@ describe('solar2Lunar', () => {
 
 describe('lunar2solar', () => {
   test('2018-11-26', () => {
-    expect(lunar2solar(2018, 11, 26)).toEqual({ "day": 1, "month": 1, "year": 2019, });
+    expect(lunar2solar(2018, 11, 26)).toEqual({ day: 1, month: 1, year: 2019 });
   });
 
   test('2019-1-1', () => {
